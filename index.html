@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <title>FauzanStore - Top Up Game</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: linear-gradient(135deg, #3b00ff, #7b00ff);
+      color: white;
+      min-height: 100vh;
+    }
+
+    .container {
+      max-width: 400px;
+      margin: auto;
+      padding: 20px;
+    }
+
+    .card {
+      background: rgba(0,0,0,0.5);
+      border-radius: 15px;
+      padding: 20px;
+      box-shadow: 0 0 20px rgba(0,0,0,0.5);
+    }
+
+    h1 {
+      text-align: center;
+      margin-bottom: 10px;
+    }
+
+    p {
+      text-align: center;
+      font-size: 14px;
+      opacity: 0.8;
+    }
+
+    select, input, button {
+      width: 100%;
+      padding: 12px;
+      margin-top: 12px;
+      border-radius: 8px;
+      border: none;
+      font-size: 16px;
+    }
+
+    select, input {
+      background: #fff;
+      color: #000;
+    }
+
+    button {
+      background: #00ffcc;
+      color: #000;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    button:hover {
+      opacity: 0.9;
+    }
+
+    .price {
+      margin-top: 10px;
+      font-weight: bold;
+      text-align: center;
+      font-size: 18px;
+    }
+
+    footer {
+      text-align: center;
+      margin-top: 20px;
+      font-size: 12px;
+      opacity: 0.7;
+    }
+  </style>
+</head>
+<body>
+
+<div class="container">
+  <div class="card">
+    <h1>FauzanStore</h1>
+    <p>Top Up Game Murah & Aman</p>
+
+    <input type="text" placeholder="ID Player / Server">
+
+    <select id="game" onchange="updateDiamond()">
+      <option value="">Pilih Game</option>
+      <option value="ff">Free Fire</option>
+      <option value="ml">Mobile Legends</option>
+    </select>
+
+    <select id="diamond" onchange="showPrice()">
+      <option value="">Pilih Diamond</option>
+    </select>
+
+    <div class="price" id="price"></div>
+
+    <button onclick="order()">Order via WhatsApp</button>
+  </div>
+
+  <footer>
+    © 2026 FauzanStore
+  </footer>
+</div>
+
+<script>
+  const data = {
+    ff: [
+      { d: "20 Diamond", h: 10000 },
+      { d: "86 Diamond", h: 30000 },
+      { d: "172 Diamond", h: 70000 },
+      { d: "257 Diamond", h: 83000 },
+      { d: "300 Diamond", h: 90000 },
+      { d: "1000 Diamond", h: 105000 }
+    ],
+    ml: [
+      { d: "20 Diamond", h: 5000 },
+      { d: "50 Diamond", h: 10000 },
+      { d: "75 Diamond", h: 20000 },
+      { d: "80 Diamond", h: 30000 },
+      { d: "100 Diamond", h: 40000 },
+      { d: "110 Diamond", h: 50000 },
+      { d: "200 Diamond", h: 65000 },
+      { d: "1000 Diamond", h: 100000 }
+    ]
+  };
+
+  function updateDiamond() {
+    const game = document.getElementById("game").value;
+    const diamond = document.getElementById("diamond");
+    const price = document.getElementById("price");
+
+    diamond.innerHTML = '<option value="">Pilih Diamond</option>';
+    price.innerHTML = "";
+
+    if (!game) return;
+
+    data[game].forEach((item, index) => {
+      const opt = document.createElement("option");
+      opt.value = index;
+      opt.text = `${item.d}`;
+      diamond.add(opt);
+    });
+  }
+
+  function showPrice() {
+    const game = document.getElementById("game").value;
+    const diamondIndex = document.getElementById("diamond").value;
+    const price = document.getElementById("price");
+
+    if (diamondIndex === "") {
+      price.innerHTML = "";
+      return;
+    }
+
+    const harga = data[game][diamondIndex].h;
+    price.innerHTML = "Harga: Rp " + harga.toLocaleString("id-ID");
+  }
+
+  function order() {
+    const game = document.getElementById("game").value;
+    const diamondIndex = document.getElementById("diamond").value;
+
+    if (!game || diamondIndex === "") {
+      alert("Lengkapi pilihan dulu!");
+      return;
+    }
+
+    const gameName = game === "ff" ? "Free Fire" : "Mobile Legends";
+    const diamond = data[game][diamondIndex].d;
+    const harga = data[game][diamondIndex].h;
+
+    const pesan = `Halo FauzanStore%0ASaya mau top up:%0A
+Game: ${gameName}%0A
+Diamond: ${diamond}%0AHarga: Rp ${harga.toLocaleString("id-ID")}`;
+
+    window.open("https://wa.me/62XXXXXXXXXX?text=" + pesan);
+  }
+</script>
+
+</body>
+        </html>
