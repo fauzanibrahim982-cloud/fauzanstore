@@ -1,240 +1,186 @@
-<!DOCTYPE html><html lang="id">
+<!DOCTYPE html>
+<html lang="id">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>FauzanStore | Top Up Game</title>  <style>
+  <meta charset="UTF-8">
+  <title>FauzanStore - Top Up Game</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <style>
     body {
       margin: 0;
-      font-family: Arial, Helvetica, sans-serif;
-      background: #020617;
-      color: #e5e7eb;
-    }
-
-    header {
-      background: linear-gradient(135deg, #2563eb, #7c3aed);
-      padding: 18px;
-      text-align: center;
-    }
-
-    header h1 {
-      margin: 0;
-      font-size: 24px;
-    }
-
-    header p {
-      margin: 6px 0 0;
-      font-size: 13px;
-      opacity: 0.9;
+      font-family: Arial, sans-serif;
+      background: linear-gradient(135deg, #3b00ff, #7b00ff);
+      color: white;
+      min-height: 100vh;
     }
 
     .container {
-      max-width: 1000px;
-      margin: 20px auto;
-      padding: 15px;
+      max-width: 400px;
+      margin: auto;
+      padding: 20px;
     }
 
-    .section-title {
-      margin: 20px 0 10px;
-      font-size: 18px;
-      font-weight: bold;
+    .card {
+      background: rgba(0,0,0,0.5);
+      border-radius: 15px;
+      padding: 20px;
+      box-shadow: 0 0 20px rgba(0,0,0,0.5);
     }
 
-    .game-list {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
-      gap: 15px;
-    }
-
-    .game {
-      background: #020617;
-      border: 1px solid #334155;
-      border-radius: 14px;
-      padding: 20px 10px;
+    h1 {
       text-align: center;
-      cursor: pointer;
-      transition: 0.2s;
+      margin-bottom: 10px;
     }
 
-    .game:hover {
-      border-color: #7c3aed;
-      transform: translateY(-3px);
+    p {
+      text-align: center;
+      font-size: 14px;
+      opacity: 0.8;
     }
 
-    .game.active {
-      border-color: #22c55e;
-      box-shadow: 0 0 0 2px rgba(34,197,94,0.3);
-    }
-
-    .form-box {
-      background: #020617;
-      border: 1px solid #334155;
-      border-radius: 14px;
-      padding: 15px;
-      margin-top: 15px;
-    }
-
-    label {
-      font-size: 13px;
-      font-weight: bold;
-      display: block;
-      margin-bottom: 6px;
-    }
-
-    input {
+    select, input, button {
       width: 100%;
       padding: 12px;
-      border-radius: 10px;
-      border: 1px solid #334155;
-      background: #020617;
-      color: #e5e7eb;
-      margin-bottom: 15px;
-    }
-
-    .nominal-list {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
-      gap: 15px;
-    }
-
-    .nominal {
-      border: 1px solid #334155;
-      border-radius: 14px;
-      padding: 15px;
-      cursor: pointer;
-      transition: 0.2s;
-    }
-
-    .nominal:hover {
-      border-color: #7c3aed;
-    }
-
-    .nominal.active {
-      border-color: #22c55e;
-      box-shadow: 0 0 0 2px rgba(34,197,94,0.3);
-    }
-
-    .nominal h3 {
-      margin: 0;
+      margin-top: 12px;
+      border-radius: 8px;
+      border: none;
       font-size: 16px;
     }
 
-    .nominal p {
-      margin: 6px 0 0;
-      font-size: 14px;
-      color: #a5b4fc;
+    select, input {
+      background: #fff;
+      color: #000;
     }
 
     button {
-      width: 100%;
-      padding: 14px;
-      margin-top: 20px;
-      border: none;
-      border-radius: 12px;
-      background: linear-gradient(135deg, #2563eb, #7c3aed);
-      color: white;
-      font-size: 15px;
+      background: #00ffcc;
+      color: #000;
       font-weight: bold;
       cursor: pointer;
+    }
+
+    button:hover {
+      opacity: 0.9;
+    }
+
+    .price {
+      margin-top: 10px;
+      font-weight: bold;
+      text-align: center;
+      font-size: 18px;
     }
 
     footer {
       text-align: center;
-      padding: 15px;
+      margin-top: 20px;
       font-size: 12px;
-      color: #94a3b8;
+      opacity: 0.7;
     }
-  
-#chat-header{background:linear-gradient(135deg,#7c3aed,#2563eb);padding:10px;text-align:center;font-weight:bold}
-#chat-body{height:180px;overflow-y:auto;padding:10px}
-#chat-body p{margin:6px 0}
-#chat-body .bot{color:#93c5fd}
-#chat-body .user{text-align:right;color:#a7f3d0}
-#chat-input{width:100%;border:none;padding:8px;resize:none;background:#020617;color:white}
-#chat-box button{width:100%;border:none;padding:8px;background:#22c55e;font-weight:bold;cursor:pointer}
-</style></head>
-<body><header>
-  <h1>FauzanStore</h1>
-  <p>Top Up Game • Aman • Cepat • Murah</p>
-</header><div class="container">  <div class="section-title">Pilih Game</div>
-  <div class="game-list">
-    <div class="game" onclick="selectGame('Mobile Legends', this)">Mobile Legends</div>
-    <div class="game" onclick="selectGame('Free Fire', this)">Free Fire</div>
-  </div>  <div class="section-title">Data Akun</div>
-  <div class="form-box">
-    <label>ID Game</label>
-    <input type="text" id="userid" placeholder="Masukkan ID Game" />
-  </div>  <div class="section-title">Pilih Nominal</div>
-  <div class="nominal-list">
-    <div class="nominal" onclick="selectNominal('20 Diamond - Rp10.000', this)">
-      <h3>20 Diamond</h3>
-      <p>Rp10.000</p>
-    </div>
-    <div class="nominal" onclick="selectNominal('86 Diamond - Rp30.000', this)">
-      <h3>86 Diamond</h3>
-      <p>Rp30.000</p>
-    </div>
-    <div class="nominal" onclick="selectNominal('172 Diamond - Rp86.000', this)">
-      <h3>172 Diamond</h3>
-      <p>Rp86.000</p>
-    </div>
-    <div class="nominal" onclick="selectNominal('257 Diamond - Rp90.000', this)">
-      <h3>257 Diamond</h3>
-      <p>Rp90.000</p>
-    </div>
-  </div><button onclick="checkout()">Beli Sekarang</button>
+  </style>
+</head>
+<body>
 
-</div><footer>
-  © 2026 FauzanStore • Order via WhatsApp
-</footer>  <div id="chat-body">
-    <p class="bot">Halo 👋 Ada yang bisa dibantu?</p>
+<div class="container">
+  <div class="card">
+    <h1>FauzanStore</h1>
+    <p>Top Up Game Murah & Aman</p>
+
+    <input type="text" placeholder="ID Player / Server">
+
+    <select id="game" onchange="updateDiamond()">
+      <option value="">Pilih Game</option>
+      <option value="ff">Free Fire</option>
+      <option value="ml">Mobile Legends</option>
+    </select>
+
+    <select id="diamond" onchange="showPrice()">
+      <option value="">Pilih Diamond</option>
+    </select>
+
+    <div class="price" id="price"></div>
+
+    <button onclick="order()">Order via WhatsApp</button>
   </div>
-  <textarea id="chat-input" placeholder="Ketik pesan..."></textarea>
-  <button onclick="sendChat()">Kirim</button>
-</div><script>
-  let selectedGame = '';
-  let selectedNominal = '';
 
-  function selectGame(game, el) {
-    selectedGame = game;
-    document.querySelectorAll('.game').forEach(g => g.classList.remove('active'));
-    el.classList.add('active');
+  <footer>
+    © 2026 FauzanStore
+  </footer>
+</div>
+
+<script>
+  const data = {
+    ff: [
+      { d: "20 Diamond", h: 10000 },
+      { d: "86 Diamond", h: 30000 },
+      { d: "172 Diamond", h: 70000 },
+      { d: "257 Diamond", h: 83000 },
+      { d: "300 Diamond", h: 90000 },
+      { d: "1000 Diamond", h: 105000 }
+    ],
+    ml: [
+      { d: "20 Diamond", h: 5000 },
+      { d: "50 Diamond", h: 10000 },
+      { d: "75 Diamond", h: 20000 },
+      { d: "80 Diamond", h: 30000 },
+      { d: "100 Diamond", h: 40000 },
+      { d: "110 Diamond", h: 50000 },
+      { d: "200 Diamond", h: 65000 },
+      { d: "1000 Diamond", h: 100000 }
+    ]
+  };
+
+  function updateDiamond() {
+    const game = document.getElementById("game").value;
+    const diamond = document.getElementById("diamond");
+    const price = document.getElementById("price");
+
+    diamond.innerHTML = '<option value="">Pilih Diamond</option>';
+    price.innerHTML = "";
+
+    if (!game) return;
+
+    data[game].forEach((item, index) => {
+      const opt = document.createElement("option");
+      opt.value = index;
+      opt.text = `${item.d}`;
+      diamond.add(opt);
+    });
   }
 
-  function selectNominal(nominal, el) {
-    selectedNominal = nominal;
-    document.querySelectorAll('.nominal').forEach(n => n.classList.remove('active'));
-    el.classList.add('active');
-  }
+  function showPrice() {
+    const game = document.getElementById("game").value;
+    const diamondIndex = document.getElementById("diamond").value;
+    const price = document.getElementById("price");
 
-  function checkout() {
-    const id = document.getElementById('userid').value;
-
-    if (!selectedGame || !id || !selectedNominal) {
-      alert('Lengkapi data dulu ya!');
+    if (diamondIndex === "") {
+      price.innerHTML = "";
       return;
     }
 
-    const pesan = `Halo FauzanStore,%0ASaya mau top up:%0A%0AGame: ${selectedGame}%0AID: ${id}%0ANominal: ${selectedNominal}`;
-    window.open(`https://wa.me/628XXXXXXXXX?text=${pesan}`, '_blank');
+    const harga = data[game][diamondIndex].h;
+    price.innerHTML = "Harga: Rp " + harga.toLocaleString("id-ID");
   }
-</p>`;
-  body.innerHTML+=`<p class="bot">Pesan kamu terkirim ke admin ✅</p>`;
-  body.scrollTop=body.scrollHeight;
-  input.value='';
-}
-// draggable chat
-let chatBox=document.getElementById('chat-box');
-let header=document.getElementById('chat-header');
-let offsetX=0,offsetY=0,isDown=false;
-header.addEventListener('mousedown',e=>{isDown=true;offsetX=e.clientX-chatBox.offsetLeft;offsetY=e.clientY-chatBox.offsetTop});
-document.addEventListener('mouseup',()=>isDown=false);
-document.addEventListener('mousemove',e=>{if(isDown){chatBox.style.left=(e.clientX-offsetX)+'px';chatBox.style.top=(e.clientY-offsetY)+'px';chatBox.style.bottom='auto';chatBox.style.right='auto';}});
 
-function toggleChat(){
-  const body=document.getElementById('chat-body');
-  const input=document.getElementById('chat-input');
-  body.style.display=body.style.display==='none'?'block':'none';
-  input.style.display=input.style.display==='none'?'block':'none';
-}
-</script></body>
+  function order() {
+    const game = document.getElementById("game").value;
+    const diamondIndex = document.getElementById("diamond").value;
+
+    if (!game || diamondIndex === "") {
+      alert("Lengkapi pilihan dulu!");
+      return;
+    }
+
+    const gameName = game === "ff" ? "Free Fire" : "Mobile Legends";
+    const diamond = data[game][diamondIndex].d;
+    const harga = data[game][diamondIndex].h;
+
+    const pesan = `Halo FauzanStore%0ASaya mau top up:%0A
+Game: ${gameName}%0A
+Diamond: ${diamond}%0AHarga: Rp ${harga.toLocaleString("id-ID")}`;
+
+    window.open("https://wa.me/62XXXXXXXXXX?text=" + pesan);
+  }
+</script>
+
+</body>
 </html>
