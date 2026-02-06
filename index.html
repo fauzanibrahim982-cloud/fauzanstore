@@ -45,9 +45,10 @@ header {
 .price {
   display: flex;
   justify-content: space-between;
+  align-items: center;
   margin: 8px 0;
 }
-input[type="number"] {
+.price input {
   width: 120px;
 }
 .admin {
@@ -68,8 +69,8 @@ input[type="number"] {
 
 <div class="container">
 
-  <!-- GAME MENU -->
-  <div class="card" id="menuGame">
+  <!-- MENU GAME -->
+  <div class="card">
     <h3>Pilih Game</h3>
     <div class="game-btn">
       <button onclick="openGame('ff')">FREE FIRE</button>
@@ -121,10 +122,12 @@ function openGame(id) {
 
 function adminLogin() {
   const pass = prompt("Masukkan password admin:");
-  if (pass === password) {
+  if (!pass) return;
+
+  if (pass.trim() === password) {
     isAdmin = true;
     enableEdit();
-    alert("Admin aktif. Harga bisa diubah.");
+    alert("MODE ADMIN AKTIF");
   } else {
     alert("Password salah!");
   }
@@ -132,12 +135,16 @@ function adminLogin() {
 
 function enableEdit() {
   if (!isAdmin) return;
-  document.querySelectorAll("span").forEach(span => {
-    const val = span.innerText;
-    span.innerHTML = `<input type="number" value="${val}" onchange="this.parentNode.innerText=this.value">`;
+
+  document.querySelectorAll(".price span").forEach(span => {
+    const harga = span.innerText;
+    const id = span.id;
+
+    span.innerHTML = `<input type="number" value="${harga}" 
+      oninput="document.getElementById('${id}').setAttribute('data-harga', this.value)">`;
   });
 }
 </script>
 
 </body>
-  </html>
+</html>
