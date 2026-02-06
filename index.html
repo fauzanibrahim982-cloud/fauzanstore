@@ -28,7 +28,7 @@
     color: #00ffe0;
     margin-bottom: 5px;
   }
-  p {
+  p.subtitle {
     text-align: center;
     font-size: 14px;
     color: #aaa;
@@ -45,27 +45,12 @@
   select, input { background: #111; color: #fff; }
   button { background: #00ffe0; color: #000; font-weight: bold; cursor: pointer; }
   button:hover { opacity: 0.9; }
-  .price {
-    margin-top: 10px;
-    font-weight: bold;
-    font-size: 16px;
-    text-align: center;
-  }
-  .game-list {
-    display: flex;
-    justify-content: space-around;
-    margin-top: 10px;
-  }
-  .game {
-    background: #333;
-    padding: 10px;
-    border-radius: 10px;
-    cursor: pointer;
-    transition: 0.2s;
-    text-align: center;
-  }
+  .price { margin-top: 10px; font-weight: bold; font-size: 16px; text-align: center; }
+  .game-list { display: flex; justify-content: space-around; margin-top: 10px; }
+  .game { background: #333; padding: 10px; border-radius: 10px; cursor: pointer; transition: 0.2s; text-align: center; }
   .game.active { border: 2px solid #00ffe0; }
   .game:hover { transform: translateY(-3px); }
+  .contact { font-size:13px; color:#aaa; text-align:center; margin-top:10px; }
   footer { text-align: center; margin-top: 20px; font-size: 12px; color: #888; }
 </style>
 </head>
@@ -74,7 +59,7 @@
 <div class="container">
   <div class="card">
     <h1>FauzanStore</h1>
-    <p>Top Up Game Murah & Cepat</p>
+    <p class="subtitle">Top Up Game Murah & Cepat</p>
 
     <input type="text" id="userid" placeholder="ID Player / Server">
 
@@ -98,6 +83,10 @@
     </select>
 
     <button onclick="checkout()">Top Up Sekarang</button>
+
+    <p class="contact">
+      Jika anda bermasalah atau ada masalah lain, hubungi no ini: <strong>08984830064</strong>
+    </p>
   </div>
 
   <footer>
