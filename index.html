@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>FauzanStore - Game Top Up</title>
+<title>FauzanStore</title>
 
 <style>
 body {
@@ -33,29 +33,42 @@ header {
 .game-btn button {
   width: 45%;
   padding: 15px;
-  font-size: 16px;
-  border: none;
   border-radius: 10px;
+  border: none;
   background: #d90000;
   color: white;
+  font-size: 16px;
 }
-.hidden {
-  display: none;
-}
+.hidden { display: none; }
+
 .price {
+  border: 1px solid #ddd;
+  padding: 10px;
+  border-radius: 8px;
+  margin: 8px 0;
   display: flex;
   justify-content: space-between;
-  align-items: center;
-  margin: 8px 0;
+  cursor: pointer;
 }
-.price input {
-  width: 120px;
+.price.active {
+  border-color: red;
+  background: #ffecec;
 }
+
 .admin {
   background: #000;
   color: #fff;
-  padding: 10px;
   text-align: center;
+  padding: 10px;
+}
+button.buy {
+  width: 100%;
+  padding: 14px;
+  background: green;
+  color: white;
+  border: none;
+  border-radius: 10px;
+  font-size: 16px;
 }
 </style>
 </head>
@@ -69,40 +82,36 @@ header {
 
 <div class="container">
 
-  <!-- MENU GAME -->
-  <div class="card">
-    <h3>Pilih Game</h3>
-    <div class="game-btn">
-      <button onclick="openGame('ff')">FREE FIRE</button>
-      <button onclick="openGame('ml')">MOBILE LEGENDS</button>
-    </div>
+<div class="card">
+  <h3>Pilih Game</h3>
+  <div class="game-btn">
+    <button onclick="openGame('ff')">FREE FIRE</button>
+    <button onclick="openGame('ml')">MOBILE LEGENDS</button>
   </div>
+</div>
 
-  <!-- FREE FIRE -->
-  <div class="card hidden" id="ff">
-    <h3>FREE FIRE</h3>
+<!-- FREE FIRE -->
+<div class="card hidden" id="ff">
+  <h3>FREE FIRE</h3>
 
-    <div class="price">20 DM <span id="ff20">10000</span></div>
-    <div class="price">86 DM <span id="ff86">30000</span></div>
-    <div class="price">172 DM <span id="ff172">70000</span></div>
-    <div class="price">257 DM <span id="ff257">83000</span></div>
-    <div class="price">300 DM <span id="ff300">90000</span></div>
-    <div class="price">1000 DM <span id="ff1000">105000</span></div>
-  </div>
+  <div class="price" onclick="selectItem(this,'FF 20 DM')">20 DM <span>10000</span></div>
+  <div class="price" onclick="selectItem(this,'FF 86 DM')">86 DM <span>30000</span></div>
+  <div class="price" onclick="selectItem(this,'FF 172 DM')">172 DM <span>70000</span></div>
+  <div class="price" onclick="selectItem(this,'FF 257 DM')">257 DM <span>83000</span></div>
 
-  <!-- MOBILE LEGENDS -->
-  <div class="card hidden" id="ml">
-    <h3>MOBILE LEGENDS</h3>
+  <button class="buy" onclick="buy()">BELI SEKARANG</button>
+</div>
 
-    <div class="price">20 DM <span id="ml20">5000</span></div>
-    <div class="price">50 DM <span id="ml50">10000</span></div>
-    <div class="price">75 DM <span id="ml75">20000</span></div>
-    <div class="price">80 DM <span id="ml80">30000</span></div>
-    <div class="price">100 DM <span id="ml100">40000</span></div>
-    <div class="price">110 DM <span id="ml110">50000</span></div>
-    <div class="price">200 DM <span id="ml200">65000</span></div>
-    <div class="price">1000 DM <span id="ml1000">100000</span></div>
-  </div>
+<!-- ML -->
+<div class="card hidden" id="ml">
+  <h3>MOBILE LEGENDS</h3>
+
+  <div class="price" onclick="selectItem(this,'ML 20 DM')">20 DM <span>5000</span></div>
+  <div class="price" onclick="selectItem(this,'ML 50 DM')">50 DM <span>10000</span></div>
+  <div class="price" onclick="selectItem(this,'ML 75 DM')">75 DM <span>20000</span></div>
+
+  <button class="buy" onclick="buy()">BELI SEKARANG</button>
+</div>
 
 </div>
 
@@ -111,6 +120,9 @@ header {
 </div>
 
 <script>
+let selectedGame = "";
+let selectedItem = "";
+let selectedPrice = "";
 let isAdmin = false;
 const password = "fauzanstore123";
 
@@ -118,31 +130,39 @@ function openGame(id) {
   document.getElementById("ff").classList.add("hidden");
   document.getElementById("ml").classList.add("hidden");
   document.getElementById(id).classList.remove("hidden");
+  selectedGame = id.toUpperCase();
+}
+
+function selectItem(el, name) {
+  document.querySelectorAll(".price").forEach(p => p.classList.remove("active"));
+  el.classList.add("active");
+
+  selectedItem = name;
+  selectedPrice = el.querySelector("span").innerText;
+}
+
+function buy() {
+  if (!selectedItem) {
+    alert("Pilih diamond dulu!");
+    return;
+  }
+
+  const msg = `Halo admin FauzanStore,%0ASaya mau top up:%0A${selectedItem}%0AHarga: Rp${selectedPrice}`;
+  window.open("https://wa.me/628984830064?text=" + msg);
 }
 
 function adminLogin() {
-  const pass = prompt("Masukkan password admin:");
-  if (!pass) return;
-
-  if (pass.trim() === password) {
+  const pass = prompt("Password admin:");
+  if (pass === password) {
     isAdmin = true;
-    enableEdit();
+    document.querySelectorAll(".price span").forEach(span => {
+      const val = span.innerText;
+      span.innerHTML = `<input type="number" value="${val}" oninput="this.parentNode.innerText=this.value">`;
+    });
     alert("MODE ADMIN AKTIF");
   } else {
     alert("Password salah!");
   }
-}
-
-function enableEdit() {
-  if (!isAdmin) return;
-
-  document.querySelectorAll(".price span").forEach(span => {
-    const harga = span.innerText;
-    const id = span.id;
-
-    span.innerHTML = `<input type="number" value="${harga}" 
-      oninput="document.getElementById('${id}').setAttribute('data-harga', this.value)">`;
-  });
 }
 </script>
 
