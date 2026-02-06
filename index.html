@@ -17,9 +17,7 @@ header {
   padding: 15px;
   text-align: center;
 }
-.container {
-  padding: 15px;
-}
+.container { padding: 15px; }
 .card {
   background: white;
   border-radius: 10px;
@@ -41,6 +39,14 @@ header {
 }
 .hidden { display: none; }
 
+input {
+  width: 100%;
+  padding: 12px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  margin: 8px 0;
+}
+
 .price {
   border: 1px solid #ddd;
   padding: 10px;
@@ -55,12 +61,6 @@ header {
   background: #ffecec;
 }
 
-.admin {
-  background: #000;
-  color: #fff;
-  text-align: center;
-  padding: 10px;
-}
 button.buy {
   width: 100%;
   padding: 14px;
@@ -69,6 +69,14 @@ button.buy {
   border: none;
   border-radius: 10px;
   font-size: 16px;
+  margin-top: 10px;
+}
+
+.admin {
+  background: #000;
+  color: #fff;
+  text-align: center;
+  padding: 10px;
 }
 </style>
 </head>
@@ -90,14 +98,20 @@ button.buy {
   </div>
 </div>
 
+<!-- DATA AKUN -->
+<div class="card">
+  <h3>Data Akun</h3>
+  <input id="userid" placeholder="Masukkan User ID" />
+  <input id="server" placeholder="Server (opsional, ML)" />
+</div>
+
 <!-- FREE FIRE -->
 <div class="card hidden" id="ff">
   <h3>FREE FIRE</h3>
 
-  <div class="price" onclick="selectItem(this,'FF 20 DM')">20 DM <span>10000</span></div>
-  <div class="price" onclick="selectItem(this,'FF 86 DM')">86 DM <span>30000</span></div>
-  <div class="price" onclick="selectItem(this,'FF 172 DM')">172 DM <span>70000</span></div>
-  <div class="price" onclick="selectItem(this,'FF 257 DM')">257 DM <span>83000</span></div>
+  <div class="price" onclick="selectItem(this,'FREE FIRE 20 DM')">20 DM <span>10000</span></div>
+  <div class="price" onclick="selectItem(this,'FREE FIRE 86 DM')">86 DM <span>30000</span></div>
+  <div class="price" onclick="selectItem(this,'FREE FIRE 172 DM')">172 DM <span>70000</span></div>
 
   <button class="buy" onclick="buy()">BELI SEKARANG</button>
 </div>
@@ -106,9 +120,8 @@ button.buy {
 <div class="card hidden" id="ml">
   <h3>MOBILE LEGENDS</h3>
 
-  <div class="price" onclick="selectItem(this,'ML 20 DM')">20 DM <span>5000</span></div>
-  <div class="price" onclick="selectItem(this,'ML 50 DM')">50 DM <span>10000</span></div>
-  <div class="price" onclick="selectItem(this,'ML 75 DM')">75 DM <span>20000</span></div>
+  <div class="price" onclick="selectItem(this,'MOBILE LEGENDS 20 DM')">20 DM <span>5000</span></div>
+  <div class="price" onclick="selectItem(this,'MOBILE LEGENDS 50 DM')">50 DM <span>10000</span></div>
 
   <button class="buy" onclick="buy()">BELI SEKARANG</button>
 </div>
@@ -120,44 +133,48 @@ button.buy {
 </div>
 
 <script>
-let selectedGame = "";
 let selectedItem = "";
 let selectedPrice = "";
-let isAdmin = false;
-const password = "fauzanstore123";
 
 function openGame(id) {
   document.getElementById("ff").classList.add("hidden");
   document.getElementById("ml").classList.add("hidden");
   document.getElementById(id).classList.remove("hidden");
-  selectedGame = id.toUpperCase();
 }
 
 function selectItem(el, name) {
   document.querySelectorAll(".price").forEach(p => p.classList.remove("active"));
   el.classList.add("active");
-
   selectedItem = name;
   selectedPrice = el.querySelector("span").innerText;
 }
 
 function buy() {
-  if (!selectedItem) {
-    alert("Pilih diamond dulu!");
+  const uid = document.getElementById("userid").value;
+  const server = document.getElementById("server").value;
+
+  if (!uid || !selectedItem) {
+    alert("Lengkapi ID dan pilih diamond!");
     return;
   }
 
-  const msg = `Halo admin FauzanStore,%0ASaya mau top up:%0A${selectedItem}%0AHarga: Rp${selectedPrice}`;
-  window.open("https://wa.me/628984830064?text=" + msg);
+  const msg =
+`Halo admin FauzanStore
+Saya mau top up:
+${selectedItem}
+User ID: ${uid}${server ? " ("+server+")" : ""}
+Harga: Rp${selectedPrice}`;
+
+  window.open("https://wa.me/628984830064?text=" + encodeURIComponent(msg));
 }
 
 function adminLogin() {
   const pass = prompt("Password admin:");
-  if (pass === password) {
-    isAdmin = true;
+  if (pass === "fauzanstore123") {
     document.querySelectorAll(".price span").forEach(span => {
-      const val = span.innerText;
-      span.innerHTML = `<input type="number" value="${val}" oninput="this.parentNode.innerText=this.value">`;
+      const harga = span.innerText;
+      span.innerHTML = `<input type="number" value="${harga}" 
+        oninput="this.parentNode.innerText=this.value">`;
     });
     alert("MODE ADMIN AKTIF");
   } else {
