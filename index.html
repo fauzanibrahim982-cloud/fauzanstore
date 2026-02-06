@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>FauzanStore - Game Top Up</title>
+
+<style>
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: #f5f5f5;
+}
+header {
+  background: linear-gradient(135deg, #b30000, #ff0000);
+  color: white;
+  padding: 15px;
+  text-align: center;
+}
+.container {
+  padding: 15px;
+}
+.card {
+  background: white;
+  border-radius: 10px;
+  padding: 15px;
+  margin-bottom: 15px;
+}
+.game-btn {
+  display: flex;
+  justify-content: space-around;
+}
+.game-btn button {
+  width: 45%;
+  padding: 15px;
+  font-size: 16px;
+  border: none;
+  border-radius: 10px;
+  background: #d90000;
+  color: white;
+}
+.hidden {
+  display: none;
+}
+.price {
+  display: flex;
+  justify-content: space-between;
+  margin: 8px 0;
+}
+input[type="number"] {
+  width: 120px;
+}
+.admin {
+  background: #000;
+  color: #fff;
+  padding: 10px;
+  text-align: center;
+}
+</style>
+</head>
+
+<body>
+
+<header>
+  <h2>FAUZANSTORE</h2>
+  <p>Top Up Game Murah & Aman</p>
+</header>
+
+<div class="container">
+
+  <!-- GAME MENU -->
+  <div class="card" id="menuGame">
+    <h3>Pilih Game</h3>
+    <div class="game-btn">
+      <button onclick="openGame('ff')">FREE FIRE</button>
+      <button onclick="openGame('ml')">MOBILE LEGENDS</button>
+    </div>
+  </div>
+
+  <!-- FREE FIRE -->
+  <div class="card hidden" id="ff">
+    <h3>FREE FIRE</h3>
+
+    <div class="price">20 DM <span id="ff20">10000</span></div>
+    <div class="price">86 DM <span id="ff86">30000</span></div>
+    <div class="price">172 DM <span id="ff172">70000</span></div>
+    <div class="price">257 DM <span id="ff257">83000</span></div>
+    <div class="price">300 DM <span id="ff300">90000</span></div>
+    <div class="price">1000 DM <span id="ff1000">105000</span></div>
+  </div>
+
+  <!-- MOBILE LEGENDS -->
+  <div class="card hidden" id="ml">
+    <h3>MOBILE LEGENDS</h3>
+
+    <div class="price">20 DM <span id="ml20">5000</span></div>
+    <div class="price">50 DM <span id="ml50">10000</span></div>
+    <div class="price">75 DM <span id="ml75">20000</span></div>
+    <div class="price">80 DM <span id="ml80">30000</span></div>
+    <div class="price">100 DM <span id="ml100">40000</span></div>
+    <div class="price">110 DM <span id="ml110">50000</span></div>
+    <div class="price">200 DM <span id="ml200">65000</span></div>
+    <div class="price">1000 DM <span id="ml1000">100000</span></div>
+  </div>
+
+</div>
+
+<div class="admin">
+  <button onclick="adminLogin()">MODE ADMIN</button>
+</div>
+
+<script>
+let isAdmin = false;
+const password = "fauzanstore123";
+
+function openGame(id) {
+  document.getElementById("ff").classList.add("hidden");
+  document.getElementById("ml").classList.add("hidden");
+  document.getElementById(id).classList.remove("hidden");
+}
+
+function adminLogin() {
+  const pass = prompt("Masukkan password admin:");
+  if (pass === password) {
+    isAdmin = true;
+    enableEdit();
+    alert("Admin aktif. Harga bisa diubah.");
+  } else {
+    alert("Password salah!");
+  }
+}
+
+function enableEdit() {
+  if (!isAdmin) return;
+  document.querySelectorAll("span").forEach(span => {
+    const val = span.innerText;
+    span.innerHTML = `<input type="number" value="${val}" onchange="this.parentNode.innerText=this.value">`;
+  });
+}
+</script>
+
+</body>
+  </html>
