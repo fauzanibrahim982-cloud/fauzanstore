@@ -3,14 +3,13 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>FauzanStore - Top Up Game</title>
+<title>FauzanStore RB Style</title>
 <style>
   body {
     margin: 0;
     font-family: Arial, sans-serif;
-    background: linear-gradient(135deg, #3b00ff, #7b00ff);
-    color: white;
-    min-height: 100vh;
+    background: #1b1b1b;
+    color: #fff;
   }
   .container {
     max-width: 400px;
@@ -18,31 +17,56 @@
     padding: 20px;
   }
   .card {
-    background: rgba(0,0,0,0.5);
+    background: #222;
     border-radius: 15px;
     padding: 20px;
-    box-shadow: 0 0 20px rgba(0,0,0,0.5);
     margin-bottom: 20px;
+    box-shadow: 0 0 15px rgba(0,255,255,0.2);
   }
-  h1 { text-align: center; margin-bottom: 10px; }
-  p { text-align: center; font-size: 14px; opacity: 0.8; }
+  h1 {
+    text-align: center;
+    color: #00ffe0;
+    margin-bottom: 5px;
+  }
+  p {
+    text-align: center;
+    font-size: 14px;
+    color: #aaa;
+    margin-bottom: 15px;
+  }
   select, input, button {
     width: 100%;
     padding: 12px;
-    margin-top: 12px;
+    margin-top: 10px;
     border-radius: 8px;
     border: none;
     font-size: 16px;
   }
-  select, input { background: #fff; color: #000; }
-  button { background: #00ffcc; color: #000; font-weight: bold; cursor: pointer; }
+  select, input { background: #111; color: #fff; }
+  button { background: #00ffe0; color: #000; font-weight: bold; cursor: pointer; }
   button:hover { opacity: 0.9; }
-  .price { margin-top: 10px; font-weight: bold; text-align: center; font-size: 18px; }
-  footer { text-align: center; margin-top: 20px; font-size: 12px; opacity: 0.7; }
-  .game-list { display: flex; justify-content: space-around; margin-top: 10px; }
-  .game { background: rgba(255,255,255,0.2); padding: 10px; border-radius: 10px; cursor: pointer; transition: 0.2s; }
-  .game.active { border: 2px solid #00ffcc; }
+  .price {
+    margin-top: 10px;
+    font-weight: bold;
+    font-size: 16px;
+    text-align: center;
+  }
+  .game-list {
+    display: flex;
+    justify-content: space-around;
+    margin-top: 10px;
+  }
+  .game {
+    background: #333;
+    padding: 10px;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: 0.2s;
+    text-align: center;
+  }
+  .game.active { border: 2px solid #00ffe0; }
   .game:hover { transform: translateY(-3px); }
+  footer { text-align: center; margin-top: 20px; font-size: 12px; color: #888; }
 </style>
 </head>
 <body>
@@ -50,7 +74,7 @@
 <div class="container">
   <div class="card">
     <h1>FauzanStore</h1>
-    <p>Top Up Game Murah & Aman</p>
+    <p>Top Up Game Murah & Cepat</p>
 
     <input type="text" id="userid" placeholder="ID Player / Server">
 
