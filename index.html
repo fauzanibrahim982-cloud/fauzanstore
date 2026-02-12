@@ -1,172 +1,146 @@
 <!DOCTYPE html>
-<html lang="id">
+<html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>FauzanStore - Top Up Game</title>
+<title>OjanTopup</title>
 
 <style>
 body {
   margin: 0;
   font-family: Arial, sans-serif;
-  background: #f2f2f2;
-}
-header {
-  background: linear-gradient(135deg, #0066ff, #8a2be2);
+  background: linear-gradient(135deg, #141e30, #243b55);
   color: white;
-  padding: 20px;
   text-align: center;
 }
-.container {
-  padding: 15px;
-}
-.card {
-  background: white;
-  border-radius: 12px;
-  padding: 15px;
-  margin-bottom: 15px;
-}
-button {
-  padding: 12px;
-  border: none;
-  border-radius: 10px;
-  background: #0066ff;
-  color: white;
-  font-size: 16px;
-}
-.game-btn {
-  display: flex;
-  gap: 10px;
-}
-.game-btn button {
-  flex: 1;
-}
-.hidden {
-  display: none;
-}
-input {
-  width: 100%;
-  padding: 10px;
-  margin: 8px 0;
-  border-radius: 8px;
-  border: 1px solid #ccc;
-}
-.list div {
-  padding: 10px;
-  margin: 6px 0;
-  background: #f7f7f7;
-  border-radius: 8px;
-  cursor: pointer;
-}
-.list div:hover {
-  background: #e0e0e0;
-}
-.footer {
-  text-align: center;
-  padding: 15px;
-}
-.admin-btn {
+
+.navbar {
   background: black;
+  padding: 15px;
+  font-size: 20px;
+  font-weight: bold;
 }
-.note {
-  font-size: 12px;
-  color: gray;
-  margin-top: 10px;
+
+h1 {
+  margin-top: 20px;
+}
+
+.container {
+  max-width: 400px;
+  margin: 20px auto;
+  background: #1e1e1e;
+  padding: 20px;
+  border-radius: 15px;
+  box-shadow: 0 0 20px rgba(0,0,0,0.5);
+}
+
+select, input, button {
+  width: 100%;
+  padding: 12px;
+  margin: 10px 0;
+  border-radius: 8px;
+  border: none;
+  font-size: 14px;
+}
+
+button {
+  background: #00c853;
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+button:hover {
+  background: #00e676;
 }
 </style>
 </head>
 
 <body>
 
-<header>
-  <h2>FAUZANSTORE</h2>
-  <p>Top Up Game Murah & Aman</p>
-</header>
+<div class="navbar">OjanTopup</div>
+
+<h1>🔥 OjanTopup Store 🔥</h1>
 
 <div class="container">
 
-  <!-- MENU GAME -->
-  <div class="card">
-    <h3>Pilih Game</h3>
-    <div class="game-btn">
-      <button onclick="openGame('ff')">FREE FIRE</button>
-      <button onclick="openGame('ml')">MOBILE LEGENDS</button>
-    </div>
-  </div>
+<select id="game">
+  <option value="ff">Free Fire</option>
+  <option value="ml">Mobile Legends</option>
+  <option value="pubg">PUBG Mobile</option>
+  <option value="fc">FC Mobile</option>
+  <option value="roblox">Roblox</option>
+  <option value="genshin">Genshin Impact</option>
+</select>
 
-  <!-- FREE FIRE -->
-  <div class="card hidden" id="ff">
-    <h3>FREE FIRE</h3>
-    <input type="text" placeholder="Masukkan ID Free Fire">
+<input type="text" id="userid" placeholder="Enter User ID">
 
-    <div class="list">
-      <div data-game="FF" data-paket="20 DM" data-harga="2000">20 DM – Rp2.000</div>
-      <div data-game="FF" data-paket="86 DM" data-harga="5000">86 DM – Rp5.000</div>
-      <div data-game="FF" data-paket="172 DM" data-harga="25000">172 DM – Rp25.000</div>
-      <div data-game="FF" data-paket="257 DM" data-harga="36000">257 DM – Rp36.000</div>
-      <div data-game="FF" data-paket="300 DM" data-harga="47000">300 DM – Rp47.000</div>
-      <div data-game="FF" data-paket="1000 DM" data-harga="110000">1000 DM – Rp110.000</div>
-    </div>
-  </div>
+<select id="product"></select>
 
-  <!-- MOBILE LEGENDS -->
-  <div class="card hidden" id="ml">
-    <h3>MOBILE LEGENDS</h3>
-    <input type="text" placeholder="Masukkan ID(Server)">
+<select id="payment">
+  <option>DANA</option>
+  <option>OVO</option>
+  <option>QRIS</option>
+  <option>Bank Transfer</option>
+</select>
 
-    <div class="list">
-      <div data-game="ML" data-paket="86 DM" data-harga="5000">86 DM – Rp5.000</div>
-      <div data-game="ML" data-paket="172 DM" data-harga="10000">172 DM – Rp10.000</div>
-      <div data-game="ML" data-paket="257 DM" data-harga="20000">257 DM – Rp20.000</div>
-      <div data-game="ML" data-paket="515 DM" data-harga="50000">515 DM – Rp50.000</div>
-      <div data-game="ML" data-paket="1000 DM" data-harga="100000">1000 DM – Rp100.000</div>
-    </div>
-  </div>
+<button onclick="orderNow()">Order Now</button>
 
-</div>
-
-<div class="footer">
-  <button class="admin-btn" onclick="adminLogin()">MODE ADMIN</button>
-  <div class="note">
-    Jika ada masalah hubungi WhatsApp 08984830064
-  </div>
 </div>
 
 <script>
-let admin = false;
-const adminPassword = "fauzanstore";
+const productList = {
+  ff: ["70 Diamonds", "140 Diamonds", "355 Diamonds"],
+  ml: ["86 Diamonds", "172 Diamonds", "257 Diamonds"],
+  pubg: ["60 UC", "325 UC", "660 UC"],
+  fc: ["40 FC Points", "100 FC Points", "520 FC Points"],
+  roblox: ["80 Robux", "400 Robux", "800 Robux"],
+  genshin: ["60 Genesis Crystals", "300 Genesis Crystals", "980 Genesis Crystals"]
+};
 
-function openGame(id) {
-  document.getElementById("ff").classList.add("hidden");
-  document.getElementById("ml").classList.add("hidden");
-  document.getElementById(id).classList.remove("hidden");
-}
+const gameSelect = document.getElementById("game");
+const productSelect = document.getElementById("product");
 
-function adminLogin() {
-  const pass = prompt("Masukkan password admin:");
-  if (pass === adminPassword) {
-    admin = true;
-    alert("MODE ADMIN AKTIF\nKlik harga untuk mengubah");
-  } else {
-    alert("Password salah");
-  }
-}
+function updateProducts() {
+  const game = gameSelect.value;
+  productSelect.innerHTML = "";
 
-document.querySelectorAll(".list div").forEach(item => {
-  item.addEventListener("click", function () {
-    if (admin) {
-      let hargaBaru = prompt("Ubah harga:", this.dataset.harga);
-      if (hargaBaru) {
-        this.dataset.harga = hargaBaru;
-        this.innerText = `${this.dataset.paket} – Rp${Number(hargaBaru).toLocaleString()}`;
-      }
-    } else {
-      alert(
-        `Pesanan:\nGame: ${this.dataset.game}\nPaket: ${this.dataset.paket}\nHarga: Rp${Number(this.dataset.harga).toLocaleString()}\n\nHubungi admin untuk lanjut pembayaran`
-      );
-    }
+  productList[game].forEach(function(item) {
+    const option = document.createElement("option");
+    option.text = item;
+    option.value = item;
+    productSelect.add(option);
   });
-});
+}
+
+gameSelect.addEventListener("change", updateProducts);
+
+// Load pertama kali
+updateProducts();
+
+function orderNow() {
+  const gameText = gameSelect.options[gameSelect.selectedIndex].text;
+  const userid = document.getElementById("userid").value;
+  const product = productSelect.value;
+  const payment = document.getElementById("payment").value;
+
+  if(userid === "") {
+    alert("Masukkan User ID dulu!");
+    return;
+  }
+
+  const message =
+  "Halo Admin, saya ingin top up:%0A%0A" +
+  "Game: " + gameText + "%0A" +
+  "User ID: " + userid + "%0A" +
+  "Product: " + product + "%0A" +
+  "Payment: " + payment;
+
+  const whatsapp = "https://wa.me/628984830064?text=" + message;
+
+  window.open(whatsapp, "_blank");
+}
 </script>
 
 </body>
