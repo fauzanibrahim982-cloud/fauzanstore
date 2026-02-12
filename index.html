@@ -3,22 +3,22 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>OjanTopup</title>
+<title>OjanTopup Store</title>
 
 <style>
 body{
   margin:0;
-  font-family:Arial;
-  background:linear-gradient(135deg,#141e30,#243b55);
+  font-family:Arial, sans-serif;
+  background:linear-gradient(135deg,#1f1c2c,#928dab);
   color:white;
   text-align:center;
 }
 
 .navbar{
-  background:black;
+  background:#000;
   padding:15px;
+  font-size:20px;
   font-weight:bold;
-  font-size:18px;
 }
 
 .container{
@@ -33,8 +33,8 @@ select,input,button{
   width:100%;
   padding:12px;
   margin:8px 0;
-  border-radius:8px;
   border:none;
+  border-radius:8px;
   font-size:14px;
 }
 
@@ -43,6 +43,10 @@ button{
   color:white;
   font-weight:bold;
   cursor:pointer;
+}
+
+button:hover{
+  opacity:0.9;
 }
 </style>
 </head>
@@ -80,12 +84,51 @@ button{
 <script>
 
 const products = {
-  ff: ["70 Diamonds","140 Diamonds","355 Diamonds"],
-  ml: ["86 Diamonds","172 Diamonds","257 Diamonds"],
-  pubg: ["60 UC","325 UC","660 UC"],
-  fc: ["40 FC Points","100 FC Points","520 FC Points"],
-  roblox: ["80 Robux","400 Robux","800 Robux"],
-  genshin: ["60 Genesis Crystals","300 Genesis Crystals","980 Genesis Crystals"]
+
+  ff: [
+    "70 DM — Rp9.000",
+    "140 DM — Rp17.000",
+    "355 DM — Rp45.000",
+    "720 DM — Rp90.000",
+    "1450 DM — Rp180.000"
+  ],
+
+  ml: [
+    "86 DM — Rp18.000",
+    "172 DM — Rp34.000",
+    "257 DM — Rp50.000",
+    "514 DM — Rp98.000",
+    "878 DM — Rp165.000"
+  ],
+
+  pubg: [
+    "60 UC — Rp15.000",
+    "325 UC — Rp72.000",
+    "660 UC — Rp145.000",
+    "1800 UC — Rp360.000"
+  ],
+
+  fc: [
+    "40 Point — Rp7.000",
+    "100 Point — Rp18.000",
+    "520 Point — Rp90.000",
+    "1070 Point — Rp175.000"
+  ],
+
+  roblox: [
+    "80 Robux — Rp16.000",
+    "400 Robux — Rp70.000",
+    "800 Robux — Rp135.000",
+    "1700 Robux — Rp270.000"
+  ],
+
+  genshin: [
+    "60 Crystal — Rp15.000",
+    "330 Crystal — Rp72.000",
+    "1090 Crystal — Rp220.000",
+    "2240 Crystal — Rp430.000"
+  ]
+
 };
 
 function changeForm(){
@@ -93,7 +136,6 @@ function changeForm(){
   const inputArea = document.getElementById("inputArea");
   const productSelect = document.getElementById("product");
 
-  // INPUT SESUAI GAME
   if(game === "ml"){
     inputArea.innerHTML = `
       <input type="text" id="userid" placeholder="User ID">
@@ -126,7 +168,6 @@ function changeForm(){
     `;
   }
 
-  // UPDATE PRODUK
   productSelect.innerHTML = "";
   products[game].forEach(function(item){
     const option = document.createElement("option");
@@ -151,8 +192,7 @@ function orderNow(){
     idText = "User ID: " + uid + "%0AZone ID: " + zid;
   }
   else if(gameValue === "roblox"){
-    const username = document.getElementById("username").value;
-    idText = "Username: " + username;
+    idText = "Username: " + document.getElementById("username").value;
   }
   else if(gameValue === "ff"){
     idText = "Player ID: " + document.getElementById("userid").value;
@@ -171,8 +211,8 @@ function orderNow(){
   "Halo Admin, saya ingin top up:%0A%0A" +
   "Game: " + gameText + "%0A" +
   idText + "%0A" +
-  "Product: " + product + "%0A" +
-  "Payment: " + payment;
+  "Produk: " + product + "%0A" +
+  "Pembayaran: " + payment;
 
   const wa = "https://wa.me/628984830064?text=" + message;
 
