@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,8 +8,8 @@
 <style>
 body {
   margin: 0;
-  font-family: Arial, sans-serif;
-  background: linear-gradient(135deg, #141e30, #243b55);
+  font-family: Arial;
+  background: linear-gradient(135deg,#141e30,#243b55);
   color: white;
   text-align: center;
 }
@@ -17,12 +17,7 @@ body {
 .navbar {
   background: black;
   padding: 15px;
-  font-size: 20px;
   font-weight: bold;
-}
-
-h1 {
-  margin-top: 20px;
 }
 
 .container {
@@ -31,28 +26,20 @@ h1 {
   background: #1e1e1e;
   padding: 20px;
   border-radius: 15px;
-  box-shadow: 0 0 20px rgba(0,0,0,0.5);
 }
 
 select, input, button {
   width: 100%;
   padding: 12px;
-  margin: 10px 0;
+  margin: 8px 0;
   border-radius: 8px;
   border: none;
-  font-size: 14px;
 }
 
 button {
   background: #00c853;
   color: white;
   font-weight: bold;
-  cursor: pointer;
-  transition: 0.3s;
-}
-
-button:hover {
-  background: #00e676;
 }
 </style>
 </head>
@@ -60,12 +47,11 @@ button:hover {
 <body>
 
 <div class="navbar">OjanTopup</div>
-
-<h1>🔥 OjanTopup Store 🔥</h1>
+<h2>🔥 OjanTopup Store 🔥</h2>
 
 <div class="container">
 
-<select id="game">
+<select id="game" onchange="updateForm()">
   <option value="ff">Free Fire</option>
   <option value="ml">Mobile Legends</option>
   <option value="pubg">PUBG Mobile</option>
@@ -74,7 +60,7 @@ button:hover {
   <option value="genshin">Genshin Impact</option>
 </select>
 
-<input type="text" id="userid" placeholder="Enter User ID">
+<div id="idFields"></div>
 
 <select id="product"></select>
 
@@ -90,23 +76,57 @@ button:hover {
 </div>
 
 <script>
+
 const productList = {
-  ff: ["70 Diamonds", "140 Diamonds", "355 Diamonds"],
-  ml: ["86 Diamonds", "172 Diamonds", "257 Diamonds"],
-  pubg: ["60 UC", "325 UC", "660 UC"],
-  fc: ["40 FC Points", "100 FC Points", "520 FC Points"],
-  roblox: ["80 Robux", "400 Robux", "800 Robux"],
-  genshin: ["60 Genesis Crystals", "300 Genesis Crystals", "980 Genesis Crystals"]
+  ff: ["70 Diamonds", "140 Diamonds"],
+  ml: ["86 Diamonds", "172 Diamonds"],
+  pubg: ["60 UC", "325 UC"],
+  fc: ["40 FC Points", "100 FC Points"],
+  roblox: ["80 Robux", "400 Robux"],
+  genshin: ["60 Genesis Crystals", "300 Genesis Crystals"]
 };
 
-const gameSelect = document.getElementById("game");
-const productSelect = document.getElementById("product");
+function updateForm() {
+  const game = document.getElementById("game").value;
+  const idFields = document.getElementById("idFields");
+  const productSelect = document.getElementById("product");
 
-function updateProducts() {
-  const game = gameSelect.value;
+  // Ganti input sesuai game
+  if (game === "ml") {
+    idFields.innerHTML = `
+      <input type="text" id="userid" placeholder="User ID">
+      <input type="text" id="zoneid" placeholder="Zone ID">
+    `;
+  } 
+  else if (game === "roblox") {
+    idFields.innerHTML = `
+      <input type="text" id="username" placeholder="Username Roblox">
+    `;
+  }
+  else if (game === "ff") {
+    idFields.innerHTML = `
+      <input type="text" id="userid" placeholder="Player ID">
+    `;
+  }
+  else if (game === "pubg") {
+    idFields.innerHTML = `
+      <input type="text" id="userid" placeholder="Character ID">
+    `;
+  }
+  else if (game === "genshin") {
+    idFields.innerHTML = `
+      <input type="text" id="userid" placeholder="UID">
+    `;
+  }
+  else {
+    idFields.innerHTML = `
+      <input type="text" id="userid" placeholder="User ID">
+    `;
+  }
+
+  // Update produk
   productSelect.innerHTML = "";
-
-  productList[game].forEach(function(item) {
+  productList[game].forEach(item => {
     const option = document.createElement("option");
     option.text = item;
     option.value = item;
@@ -114,26 +134,31 @@ function updateProducts() {
   });
 }
 
-gameSelect.addEventListener("change", updateProducts);
-
-// Load pertama kali
-updateProducts();
-
 function orderNow() {
-  const gameText = gameSelect.options[gameSelect.selectedIndex].text;
-  const userid = document.getElementById("userid").value;
-  const product = productSelect.value;
+  const gameText = document.getElementById("game").options[
+    document.getElementById("game").selectedIndex
+  ].text;
+
+  const product = document.getElementById("product").value;
   const payment = document.getElementById("payment").value;
 
-  if(userid === "") {
-    alert("Masukkan User ID dulu!");
-    return;
+  let idInfo = "";
+
+  if (document.getElementById("username")) {
+    idInfo = "Username: " + document.getElementById("username").value;
+  } 
+  else if (document.getElementById("zoneid")) {
+    idInfo = "User ID: " + document.getElementById("userid").value +
+             "%0AZone ID: " + document.getElementById("zoneid").value;
+  } 
+  else {
+    idInfo = "ID: " + document.getElementById("userid").value;
   }
 
   const message =
   "Halo Admin, saya ingin top up:%0A%0A" +
   "Game: " + gameText + "%0A" +
-  "User ID: " + userid + "%0A" +
+  idInfo + "%0A" +
   "Product: " + product + "%0A" +
   "Payment: " + payment;
 
@@ -141,6 +166,9 @@ function orderNow() {
 
   window.open(whatsapp, "_blank");
 }
+
+updateForm();
+
 </script>
 
 </body>
