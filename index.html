@@ -1,57 +1,59 @@
 <!DOCTYPE html>
-<html>
+<html lang="id">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>OjanTopup</title>
 
 <style>
-body {
-  margin: 0;
-  font-family: Arial;
-  background: linear-gradient(135deg,#141e30,#243b55);
-  color: white;
-  text-align: center;
+body{
+  margin:0;
+  font-family:Arial;
+  background:linear-gradient(135deg,#141e30,#243b55);
+  color:white;
+  text-align:center;
 }
 
-.navbar {
-  background: black;
-  padding: 15px;
-  font-weight: bold;
+.navbar{
+  background:black;
+  padding:15px;
+  font-weight:bold;
+  font-size:18px;
 }
 
-.container {
-  max-width: 400px;
-  margin: 20px auto;
-  background: #1e1e1e;
-  padding: 20px;
-  border-radius: 15px;
+.container{
+  max-width:400px;
+  margin:20px auto;
+  background:#1e1e1e;
+  padding:20px;
+  border-radius:15px;
 }
 
-select, input, button {
-  width: 100%;
-  padding: 12px;
-  margin: 8px 0;
-  border-radius: 8px;
-  border: none;
+select,input,button{
+  width:100%;
+  padding:12px;
+  margin:8px 0;
+  border-radius:8px;
+  border:none;
+  font-size:14px;
 }
 
-button {
-  background: #00c853;
-  color: white;
-  font-weight: bold;
+button{
+  background:#00c853;
+  color:white;
+  font-weight:bold;
+  cursor:pointer;
 }
 </style>
 </head>
 
 <body>
 
-<div class="navbar">OjanTopup</div>
-<h2>🔥 OjanTopup Store 🔥</h2>
+<div class="navbar">🔥 OjanTopup Store 🔥</div>
 
 <div class="container">
 
-<select id="game" onchange="updateForm()">
+<select id="game" onchange="changeForm()">
   <option value="ff">Free Fire</option>
   <option value="ml">Mobile Legends</option>
   <option value="pubg">PUBG Mobile</option>
@@ -60,7 +62,7 @@ button {
   <option value="genshin">Genshin Impact</option>
 </select>
 
-<div id="idFields"></div>
+<div id="inputArea"></div>
 
 <select id="product"></select>
 
@@ -77,56 +79,56 @@ button {
 
 <script>
 
-const productList = {
-  ff: ["70 Diamonds", "140 Diamonds"],
-  ml: ["86 Diamonds", "172 Diamonds"],
-  pubg: ["60 UC", "325 UC"],
-  fc: ["40 FC Points", "100 FC Points"],
-  roblox: ["80 Robux", "400 Robux"],
-  genshin: ["60 Genesis Crystals", "300 Genesis Crystals"]
+const products = {
+  ff: ["70 Diamonds","140 Diamonds","355 Diamonds"],
+  ml: ["86 Diamonds","172 Diamonds","257 Diamonds"],
+  pubg: ["60 UC","325 UC","660 UC"],
+  fc: ["40 FC Points","100 FC Points","520 FC Points"],
+  roblox: ["80 Robux","400 Robux","800 Robux"],
+  genshin: ["60 Genesis Crystals","300 Genesis Crystals","980 Genesis Crystals"]
 };
 
-function updateForm() {
+function changeForm(){
   const game = document.getElementById("game").value;
-  const idFields = document.getElementById("idFields");
+  const inputArea = document.getElementById("inputArea");
   const productSelect = document.getElementById("product");
 
-  // Ganti input sesuai game
-  if (game === "ml") {
-    idFields.innerHTML = `
+  // INPUT SESUAI GAME
+  if(game === "ml"){
+    inputArea.innerHTML = `
       <input type="text" id="userid" placeholder="User ID">
       <input type="text" id="zoneid" placeholder="Zone ID">
     `;
-  } 
-  else if (game === "roblox") {
-    idFields.innerHTML = `
+  }
+  else if(game === "roblox"){
+    inputArea.innerHTML = `
       <input type="text" id="username" placeholder="Username Roblox">
     `;
   }
-  else if (game === "ff") {
-    idFields.innerHTML = `
+  else if(game === "ff"){
+    inputArea.innerHTML = `
       <input type="text" id="userid" placeholder="Player ID">
     `;
   }
-  else if (game === "pubg") {
-    idFields.innerHTML = `
+  else if(game === "pubg"){
+    inputArea.innerHTML = `
       <input type="text" id="userid" placeholder="Character ID">
     `;
   }
-  else if (game === "genshin") {
-    idFields.innerHTML = `
+  else if(game === "genshin"){
+    inputArea.innerHTML = `
       <input type="text" id="userid" placeholder="UID">
     `;
   }
-  else {
-    idFields.innerHTML = `
+  else{
+    inputArea.innerHTML = `
       <input type="text" id="userid" placeholder="User ID">
     `;
   }
 
-  // Update produk
+  // UPDATE PRODUK
   productSelect.innerHTML = "";
-  productList[game].forEach(item => {
+  products[game].forEach(function(item){
     const option = document.createElement("option");
     option.text = item;
     option.value = item;
@@ -134,40 +136,50 @@ function updateForm() {
   });
 }
 
-function orderNow() {
-  const gameText = document.getElementById("game").options[
-    document.getElementById("game").selectedIndex
-  ].text;
-
+function orderNow(){
+  const gameSelect = document.getElementById("game");
+  const gameValue = gameSelect.value;
+  const gameText = gameSelect.options[gameSelect.selectedIndex].text;
   const product = document.getElementById("product").value;
   const payment = document.getElementById("payment").value;
 
-  let idInfo = "";
+  let idText = "";
 
-  if (document.getElementById("username")) {
-    idInfo = "Username: " + document.getElementById("username").value;
-  } 
-  else if (document.getElementById("zoneid")) {
-    idInfo = "User ID: " + document.getElementById("userid").value +
-             "%0AZone ID: " + document.getElementById("zoneid").value;
-  } 
-  else {
-    idInfo = "ID: " + document.getElementById("userid").value;
+  if(gameValue === "ml"){
+    const uid = document.getElementById("userid").value;
+    const zid = document.getElementById("zoneid").value;
+    idText = "User ID: " + uid + "%0AZone ID: " + zid;
+  }
+  else if(gameValue === "roblox"){
+    const username = document.getElementById("username").value;
+    idText = "Username: " + username;
+  }
+  else if(gameValue === "ff"){
+    idText = "Player ID: " + document.getElementById("userid").value;
+  }
+  else if(gameValue === "pubg"){
+    idText = "Character ID: " + document.getElementById("userid").value;
+  }
+  else if(gameValue === "genshin"){
+    idText = "UID: " + document.getElementById("userid").value;
+  }
+  else{
+    idText = "User ID: " + document.getElementById("userid").value;
   }
 
   const message =
   "Halo Admin, saya ingin top up:%0A%0A" +
   "Game: " + gameText + "%0A" +
-  idInfo + "%0A" +
+  idText + "%0A" +
   "Product: " + product + "%0A" +
   "Payment: " + payment;
 
-  const whatsapp = "https://wa.me/628984830064?text=" + message;
+  const wa = "https://wa.me/628984830064?text=" + message;
 
-  window.open(whatsapp, "_blank");
+  window.open(wa, "_blank");
 }
 
-updateForm();
+changeForm();
 
 </script>
 
