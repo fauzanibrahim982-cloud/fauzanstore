@@ -1,394 +1,493 @@
-<!DOCTYPE html>
-<html lang="id">
+<!DOCTYPE html><html lang="id">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Perpustakaan Digital</title>
   <link rel="stylesheet" href="style.css">
-</head>
+</head><body>  <!-- HEADER -->  <header class="header"><div class="logo">
+  📚 <span>Perpustakaan Digital</span>
+</div>
 
-<body>
+<button class="login-btn" onclick="showLogin()">
+  Masuk
+</button>
 
-  <!-- HEADER -->
-  <header class="header">
-    <div class="logo">
-      📚 <span>Perpustakaan Digital</span>
-    </div>
+  </header>  <!-- ISI WEBSITE -->  <main><!-- ================= HOME ================= -->
 
-    <button class="login-btn" onclick="showLogin()">
-      Masuk
+<section id="homePage" class="page">
+
+  <div class="hero">
+
+    <p class="small-title">
+      PERPUSTAKAAN DIGITAL
+    </p>
+
+    <h1>
+      Temukan cerita.<br>
+      Buat ceritamu sendiri.
+    </h1>
+
+    <p>
+      Baca berbagai buku digital dan buat karya
+      milikmu sendiri.
+    </p>
+
+    <button class="main-btn" onclick="showBooks()">
+      📚 Jelajahi Buku
     </button>
-  </header>
-
-
-  <!-- HALAMAN UTAMA -->
-  <main>
-
-    <section id="homePage" class="page">
-
-      <div class="hero">
-        <p class="small-title">PERPUSTAKAAN DIGITAL</p>
-
-        <h1>
-          Temukan cerita.<br>
-          Buat ceritamu sendiri.
-        </h1>
-
-        <p>
-          Baca berbagai buku digital dan buat karya
-          milikmu sendiri.
-        </p>
-
-        <button class="main-btn" onclick="showBooks()">
-          📚 Jelajahi Buku
-        </button>
-      </div>
-
-
-      <div class="features">
-
-        <div class="feature">
-          <div>📖</div>
-          <h3>Banyak Buku</h3>
-          <p>
-            Temukan berbagai cerita dari pengguna lain.
-          </p>
-        </div>
-
-        <div class="feature">
-          <div>✍️</div>
-          <h3>Buat Buku</h3>
-          <p>
-            Tulis dan publikasikan ceritamu sendiri.
-          </p>
-        </div>
-
-        <div class="feature">
-          <div>👤</div>
-          <h3>Akun</h3>
-          <p>
-            Simpan dan kelola semua karya milikmu.
-          </p>
-        </div>
-
-      </div>
-
-    </section>
-
-
-    <!-- HALAMAN SEMUA BUKU -->
-    <section id="booksPage" class="page hidden">
-
-      <div class="page-title">
-        <p class="small-title">PERPUSTAKAAN</p>
-
-        <h2>Semua Buku</h2>
-
-        <p>
-          Buku yang dibuat oleh para pengguna.
-        </p>
-      </div>
-
-
-      <div class="search-box">
-        🔎
-        <input
-          type="text"
-          id="searchInput"
-          placeholder="Cari buku..."
-          oninput="searchBooks()"
-        >
-      </div>
-
-
-      <div id="bookList" class="book-grid">
-
-        <!-- Contoh buku -->
-        <div class="book-card">
-
-          <div class="book-cover">
-            📖
-          </div>
-
-          <div class="book-info">
-
-            <h3>Petualangan Pertama</h3>
-
-            <p class="author">
-              ✍️ Contoh Penulis
-            </p>
-
-            <span class="genre">
-              Petualangan
-            </span>
-
-            <button onclick="readBook()">
-              Baca
-            </button>
-
-          </div>
-
-        </div>
-
-
-        <div class="book-card">
-
-          <div class="book-cover">
-            🌌
-          </div>
-
-          <div class="book-info">
-
-            <h3>Dunia di Balik Langit</h3>
-
-            <p class="author">
-              ✍️ Contoh Penulis
-            </p>
-
-            <span class="genre">
-              Fantasi
-            </span>
-
-            <button onclick="readBook()">
-              Baca
-            </button>
-
-          </div>
-
-        </div>
-
-
-        <div class="book-card">
-
-          <div class="book-cover">
-            🕵️
-          </div>
-
-          <div class="book-info">
-
-            <h3>Misteri Rumah Tua</h3>
-
-            <p class="author">
-              ✍️ Contoh Penulis
-            </p>
-
-            <span class="genre">
-              Misteri
-            </span>
-
-            <button onclick="readBook()">
-              Baca
-            </button>
-
-          </div>
-
-        </div>
-
-      </div>
-
-    </section>
-
-
-    <!-- HALAMAN BUAT BUKU -->
-    <section id="createPage" class="page hidden">
-
-      <div class="page-title">
-
-        <p class="small-title">
-          KARYA SAYA
-        </p>
-
-        <h2>Buat Buku</h2>
-
-        <p>
-          Tempat untuk membuat buku milikmu.
-        </p>
-
-      </div>
-
-
-      <div class="create-box">
-
-        <label>
-          Judul Buku
-        </label>
-
-        <input
-          type="text"
-          placeholder="Masukkan judul buku"
-        >
-
-
-        <label>
-          Genre
-        </label>
-
-        <select>
-
-          <option>Fantasi</option>
-          <option>Petualangan</option>
-          <option>Fiksi</option>
-          <option>Misteri</option>
-          <option>Horor</option>
-          <option>Komedi</option>
-          <option>Edukasi</option>
-
-        </select>
-
-
-        <label>
-          Deskripsi
-        </label>
-
-        <textarea
-          rows="4"
-          placeholder="Ceritakan tentang buku ini..."
-        ></textarea>
-
-
-        <label>
-          Isi Buku
-        </label>
-
-        <textarea
-          rows="12"
-          placeholder="Mulai tulis ceritamu..."
-        ></textarea>
-
-
-        <button class="publish-btn">
-          📚 Publikasikan Buku
-        </button>
-
-      </div>
-
-    </section>
-
-
-    <!-- HALAMAN AKUN -->
-    <section id="accountPage" class="page hidden">
-
-      <div class="account-card">
-
-        <div class="avatar">
-          👤
-        </div>
-
-        <h2>Pengguna</h2>
-
-        <p>
-          Belum masuk ke akun
-        </p>
-
-
-        <div class="stats">
-
-          <div>
-            <strong>0</strong>
-            <span>Buku</span>
-          </div>
-
-          <div>
-            <strong>0</strong>
-            <span>Favorit</span>
-          </div>
-
-        </div>
-
-
-        <button class="main-btn" onclick="showLogin()">
-          🔐 Masuk / Daftar
-        </button>
-
-      </div>
-
-    </section>
-
-  </main>
-
-
-  <!-- NAVIGASI BAWAH -->
-  <nav class="bottom-nav">
-
-    <button onclick="showHome()" class="nav-active">
-      <span>🏠</span>
-      <small>Beranda</small>
-    </button>
-
-    <button onclick="showBooks()">
-      <span>📚</span>
-      <small>Buku</small>
-    </button>
-
-    <button onclick="showCreate()">
-      <span>➕</span>
-      <small>Buat</small>
-    </button>
-
-    <button onclick="showAccount()">
-      <span>👤</span>
-      <small>Akun</small>
-    </button>
-
-  </nav>
-
-
-  <!-- MODAL LOGIN -->
-  <div id="loginModal" class="modal hidden">
-
-    <div class="modal-box">
-
-      <button class="close" onclick="closeLogin()">
-        ✕
-      </button>
-
-      <div class="modal-icon">
-        🔐
-      </div>
-
-      <h2>Masuk</h2>
-
-      <p>
-        Masuk untuk membuat dan mengelola buku.
-      </p>
-
-
-      <label>
-        Nama Pengguna
-      </label>
-
-      <input
-        type="text"
-        placeholder="Nama pengguna"
-      >
-
-
-      <label>
-        Password
-      </label>
-
-      <input
-        type="password"
-        placeholder="Password"
-      >
-
-
-      <button class="main-btn">
-        Masuk
-      </button>
-
-
-      <p class="register-text">
-        Belum punya akun?
-        <b>Daftar</b>
-      </p>
-
-    </div>
 
   </div>
 
 
-  <script src="script.js"></script>
+  <div class="features">
 
-</body>
+    <div class="feature">
+      <div>📖</div>
+
+      <h3>
+        Banyak Buku
+      </h3>
+
+      <p>
+        Temukan berbagai cerita dari pengguna.
+      </p>
+    </div>
+
+
+    <div class="feature">
+      <div>✍️</div>
+
+      <h3>
+        Buat Buku
+      </h3>
+
+      <p>
+        Tulis dan simpan karya milikmu sendiri.
+      </p>
+    </div>
+
+
+    <div class="feature">
+      <div>👤</div>
+
+      <h3>
+        Akun
+      </h3>
+
+      <p>
+        Kelola profil dan buku yang kamu buat.
+      </p>
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- ================= SEMUA BUKU ================= -->
+
+<section id="booksPage" class="page hidden">
+
+  <div class="page-title">
+
+    <p class="small-title">
+      PERPUSTAKAAN
+    </p>
+
+    <h2>
+      Semua Buku
+    </h2>
+
+    <p>
+      Buku yang tersedia di perpustakaan.
+    </p>
+
+  </div>
+
+
+  <div class="search-box">
+
+    🔎
+
+    <input
+      type="text"
+      id="searchInput"
+      placeholder="Cari buku, penulis, atau genre..."
+      oninput="searchBooks()"
+    >
+
+  </div>
+
+
+  <div id="bookList" class="book-grid"></div>
+
+
+  <div id="emptyBooks" class="empty-state hidden">
+
+    <div>
+      📚
+    </div>
+
+    <h3>
+      Belum ada buku
+    </h3>
+
+    <p>
+      Jadilah orang pertama yang membuat buku.
+    </p>
+
+    <button
+      class="main-btn"
+      onclick="showCreate()"
+    >
+      ✍️ Buat Buku
+    </button>
+
+  </div>
+
+</section>
+
+
+<!-- ================= BUAT BUKU ================= -->
+
+<section id="createPage" class="page hidden">
+
+  <div class="page-title">
+
+    <p class="small-title">
+      KARYA SAYA
+    </p>
+
+    <h2>
+      Buat Buku
+    </h2>
+
+    <p>
+      Buat cerita dan simpan sebagai buku digital.
+    </p>
+
+  </div>
+
+
+  <div class="create-box">
+
+    <label>
+      Judul Buku
+    </label>
+
+    <input
+      type="text"
+      id="bookTitle"
+      placeholder="Masukkan judul buku"
+    >
+
+
+    <label>
+      Genre
+    </label>
+
+    <select id="bookGenre">
+
+      <option value="Fantasi">
+        Fantasi
+      </option>
+
+      <option value="Petualangan">
+        Petualangan
+      </option>
+
+      <option value="Fiksi">
+        Fiksi
+      </option>
+
+      <option value="Misteri">
+        Misteri
+      </option>
+
+      <option value="Horor">
+        Horor
+      </option>
+
+      <option value="Komedi">
+        Komedi
+      </option>
+
+      <option value="Edukasi">
+        Edukasi
+      </option>
+
+    </select>
+
+
+    <label>
+      Deskripsi
+    </label>
+
+    <textarea
+      id="bookDescription"
+      rows="4"
+      placeholder="Ceritakan tentang buku ini..."
+    ></textarea>
+
+
+    <label>
+      Isi Buku
+    </label>
+
+    <textarea
+      id="bookContent"
+      rows="14"
+      placeholder="Mulai tulis ceritamu..."
+    ></textarea>
+
+
+    <button
+      class="publish-btn"
+      onclick="createBook()"
+    >
+      📚 Publikasikan Buku
+    </button>
+
+  </div>
+
+</section>
+
+
+<!-- ================= BACA BUKU ================= -->
+
+<section id="readPage" class="page hidden">
+
+  <div class="reader">
+
+    <button
+      class="back-btn"
+      onclick="showBooks()"
+    >
+      ← Kembali ke Buku
+    </button>
+
+
+    <div class="reader-header">
+
+      <span
+        id="readGenre"
+        class="genre"
+      >
+        Genre
+      </span>
+
+      <h1 id="readTitle">
+        Judul Buku
+      </h1>
+
+      <p id="readAuthor" class="reader-author">
+        ✍️ Penulis
+      </p>
+
+    </div>
+
+
+    <div class="reader-description">
+
+      <p id="readDescription">
+        Deskripsi buku
+      </p>
+
+    </div>
+
+
+    <article
+      id="readContent"
+      class="reader-content"
+    >
+    </article>
+
+
+  </div>
+
+</section>
+
+
+<!-- ================= AKUN ================= -->
+
+<section id="accountPage" class="page hidden">
+
+  <div class="account-card">
+
+    <div class="avatar">
+      👤
+    </div>
+
+    <h2>
+      Pengguna
+    </h2>
+
+    <p>
+      Akun lokal
+    </p>
+
+
+    <div class="stats">
+
+      <div>
+
+        <strong id="bookCount">
+          0
+        </strong>
+
+        <span>
+          Buku
+        </span>
+
+      </div>
+
+
+      <div>
+
+        <strong>
+          0
+        </strong>
+
+        <span>
+          Favorit
+        </span>
+
+      </div>
+
+    </div>
+
+
+    <button
+      class="main-btn"
+      onclick="showCreate()"
+    >
+      ✍️ Buat Buku
+    </button>
+
+  </div>
+
+</section>
+
+  </main>  <!-- ================= NAVIGASI ================= -->  <nav class="bottom-nav"><button
+  onclick="showHome()"
+  class="nav-active"
+>
+
+  <span>
+    🏠
+  </span>
+
+  <small>
+    Beranda
+  </small>
+
+</button>
+
+
+<button onclick="showBooks()">
+
+  <span>
+    📚
+  </span>
+
+  <small>
+    Buku
+  </small>
+
+</button>
+
+
+<button onclick="showCreate()">
+
+  <span>
+    ➕
+  </span>
+
+  <small>
+    Buat
+  </small>
+
+</button>
+
+
+<button onclick="showAccount()">
+
+  <span>
+    👤
+  </span>
+
+  <small>
+    Akun
+  </small>
+
+</button>
+
+  </nav>  <!-- ================= LOGIN ================= -->  <div
+    id="loginModal"
+    class="modal hidden"
+  ><div class="modal-box">
+
+  <button
+    class="close"
+    onclick="closeLogin()"
+  >
+    ✕
+  </button>
+
+
+  <div class="modal-icon">
+    🔐
+  </div>
+
+
+  <h2>
+    Masuk
+  </h2>
+
+
+  <p>
+    Sistem akun online akan dibuat pada tahap berikutnya.
+  </p>
+
+
+  <label>
+    Nama Pengguna
+  </label>
+
+  <input
+    type="text"
+    id="loginUsername"
+    placeholder="Nama pengguna"
+  >
+
+
+  <label>
+    Password
+  </label>
+
+  <input
+    type="password"
+    id="loginPassword"
+    placeholder="Password"
+  >
+
+
+  <button
+    class="main-btn full-btn"
+    onclick="demoLogin()"
+  >
+    Masuk
+  </button>
+
+
+  <p class="register-text">
+    Belum punya akun?
+    <b onclick="demoRegister()">
+      Daftar
+    </b>
+  </p>
+
+</div>
+
+  </div>  <script src="script.js"></script></body>
   </html>
